@@ -3,28 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Simple To-Do List</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>My first page</h1>
-    <a href="index2.html">Go to my second page</a>
-    <section>
-      <h1>Welcome to My Style Page</h1>
+    <main class="app" aria-labelledby="app-title">
+      <header class="app__header">
+        <h1 id="app-title">Simple To-Do List</h1>
+        <p class="app__subtitle">
+          Add your tasks, mark them complete, and keep track of what is left.
+        </p>
+      </header>
 
-      <p>This is my Paragrapgh</p>
-      <p>This is my Paragrapgh 2</p>
-      <p>This is my Paragrapgh 3</p>
-      <p>This is my Paragrapgh 4</p>
-    </section>
+      <form id="todo-form" class="todo-form" autocomplete="off">
+        <label class="sr-only" for="todo-input">Add a task</label>
+        <div class="form-row">
+          <input
+            id="todo-input"
+            type="text"
+            name="task"
+            placeholder="What do you need to do?"
+            required
+            maxlength="160"
+          />
+          <button type="submit" class="btn btn--primary">Add</button>
+        </div>
+      </form>
 
-    <section>
-      <h1>Welcome to My Style Page 2</h1>
+      <section class="controls" aria-label="Task filters">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="btn filter-btn is-active" data-filter="all">
+            All
+          </button>
+          <button type="button" class="btn filter-btn" data-filter="active">
+            Active
+          </button>
+          <button type="button" class="btn filter-btn" data-filter="completed">
+            Completed
+          </button>
+        </div>
+        <p id="task-count" class="task-count" aria-live="polite"></p>
+      </section>
 
-      <p>This is my Paragrapgh</p>
-      <p>This is my Paragrapgh 2</p>
-      <p>This is my Paragrapgh 3</p>
-      <p>This is my Paragrapgh 4</p>
-    </section>
+      <section class="todo-list-wrapper" aria-label="Task list">
+        <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+        <p id="empty-state" class="empty-state">Start by adding your first task.</p>
+      </section>
+    </main>
+
+    <script src="script.js" defer></script>
   </body>
 </html>
