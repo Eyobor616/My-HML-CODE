@@ -1,15 +1,227 @@
-section {
-  border: 2px solid black;
+:root {
+  color-scheme: light dark;
+  --background: #f4f6fb;
+  --surface: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --border: #d4d9e3;
+  --shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+  --radius: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --surface: #111827;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --primary: #60a5fa;
+    --primary-hover: #3b82f6;
+    --border: rgba(148, 163, 184, 0.4);
+    --shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+
+.app {
+  width: min(100%, 36rem);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.app__header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.app__subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (max-width: 540px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row button {
+    width: 100%;
+  }
+}
+
+input[type='text'] {
+  flex: 1 1 auto;
+  padding: 0.85rem 1rem;
+  border-radius: calc(var(--radius) / 1.5);
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.95);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type='text']:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.btn {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: calc(var(--radius) / 1.5);
+  padding: 0.75rem 1.2rem;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: rgba(148, 163, 184, 0.15);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 2px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background: var(--primary-hover);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  flex: 1 1 30%;
+  min-width: 6rem;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--muted);
+}
+
+.filter-btn.is-active {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.task-count {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) / 1.2);
+}
+
+.todo-item input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.todo-item .task-text {
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+
+.todo-item .task-text.is-complete {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.todo-item .item-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.todo-item .item-actions .btn {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+.empty-state {
+  margin: 1rem 0 0;
+  color: var(--muted);
   text-align: center;
-  background-color: brown;
 }
-h1 {
-  color: blue;
-  background-color: aqua;
-  font-size: 50px;
-}
-p {
-  color: green;
-  background-color: lightyellow;
-  font-size: 30px;
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
